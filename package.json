@@ -1,0 +1,83 @@
+{
+    "name": "open-file-from-path",
+    "displayName": "Open file From Path",
+    "description": "Simple plugin for VS Code that allows you to quickly open file starting from path string.",
+    "license": "MIT",
+    "version": "1.0.0",
+    "publisher": "Jack89ita",
+    "engines": {
+        "vscode": "^1.19.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.openFileFromPath"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.openFileFromPath",
+                "title": "Open file from path"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.openFileFromPath",
+                "key": "alt+d",
+                "mac": "alt+d",
+                "when": "!terminalFocus"
+            }
+        ],
+        "configuration": {
+            "title": "Open file From Path",
+            "properties": {
+                "open-file-from-path.startingPath": {
+                    "type": "string",
+                    "default": "/",
+                    "description": "Starting path."
+                },
+                "open-file-from-path.searchExclusion": {
+                    "type": "array",
+                    "default": [
+                        "**/node_modules/**",
+                        "**/.vscode/**"
+                    ],
+                    "description": "Global search exclusion (global patterns)"
+                },
+                "open-file-from-path.regExp": {
+                    "type": "string",
+                    "default": "['|\"]([^'|\"]+)['|\"]",
+                    "description": "Custom matching regExp to detect the file (default between quotes of double quotes)"
+                },
+                "open-file-from-path.matchFileName": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Choose to search and match the pure filename or the entire path"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "eslint": "^4.6.1",
+        "recursive-readdir": "^2.2.1",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jack89ita/vscode-open-file-from-path"
+    },
+    "galleryBanner": {
+        "color": "#5d5d5d",
+        "theme": "dark"
+    },
+    "icon": "img/offp-logo.png"
+}
