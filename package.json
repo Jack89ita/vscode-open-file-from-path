@@ -15,6 +15,13 @@
         "onCommand:extension.openFileFromPath"
     ],
     "main": "./extension",
+    "keywords": [
+        "shortcuts",
+        "open-files",
+        "path",
+        "vscode",
+        "vscode-extension"
+    ],
     "contributes": {
         "commands": [
             {
