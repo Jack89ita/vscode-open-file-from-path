@@ -1,5 +1,9 @@
 # Open file from path
  
+[![](https://vsmarketplacebadge.apphb.com/version-short/jack89ita.open-file-from-path.svg)](https://marketplace.visualstudio.com/items?itemName=jack89ita.open-file-from-path)
+[![](https://vsmarketplacebadge.apphb.com/installs-short/jack89ita.open-file-from-path.svg)](https://marketplace.visualstudio.com/items?itemName=jack89ita.open-file-from-path)
+[![](https://vsmarketplacebadge.apphb.com/rating-short/jack89ita.open-file-from-path.svg)](https://marketplace.visualstudio.com/items?itemName=jack89ita.open-file-from-path)
+
 ![Open file from path](https://raw.githubusercontent.com/Jack89ita/vscode-open-file-from-path/master/img/offp-use-gif.gif)
 
 Simple plugin for VS Code that allows you to quickly open file starting from path string. E.g. 
