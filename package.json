@@ -4,7 +4,7 @@
     "description": "Simple plugin for VS Code that allows you to quickly open file starting from path string.",
     "license": "MIT",
     "version": "1.0.1",
-    "publisher": "Jack89ita",
+    "publisher": "jack89ita",
     "engines": {
         "vscode": "^1.19.0"
     },
