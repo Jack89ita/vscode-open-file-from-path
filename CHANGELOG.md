@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.3
+
+* Updated icon and colors
+
 ## 1.0.2
 
 * Added keywords in package.json
