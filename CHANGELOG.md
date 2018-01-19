@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.0
+
+* Now files are opened with the default editor behaviour.
+
 ## 1.0.3
 
 * Updated icon and colors

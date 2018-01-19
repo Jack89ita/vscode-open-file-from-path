@@ -53,11 +53,11 @@ exports.activate = context => {
           //If matchFileName is false, check the entire path to match
           if ((matchFileName && filePathConverted.split('/').pop() == lastPart) || (!matchFileName && filePathConverted.indexOf(lastPart)>0)){
             //Get only the relative path to show, otherwise it will be too long.
-            let relativePath = files[index].replace(vscode.workspace.rootPath, '');
+            let relativePath = files[index].replace(vscode.workspace.rootPath, '').replace(/\\/g, '/');
             foundList.push({
               label: lastPart,
               description: relativePath,
-              path: files[index]
+              path: filePathConverted
             });
           }
         }
@@ -67,8 +67,9 @@ exports.activate = context => {
           showError("Warning, no matches were found.");
         } else if (foundList.length == 1){
           //If 1 match -> open file
-          vscode.workspace.openTextDocument(foundList[0].path)
-            .then(vscode.window.showTextDocument);
+          let url = vscode.Uri.parse('file:///' + foundList[0].path);
+          let success = vscode.commands.executeCommand('vscode.open', url);
+
         }else{
           //If multiple matches -> open quick pick
           vscode.window.showQuickPick(foundList).then(selected => {
