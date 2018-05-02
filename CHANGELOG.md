@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.1
+
+* Updated dependencies
+
 ## 1.1.0
 
 * Now files are opened with the default editor behaviour.
