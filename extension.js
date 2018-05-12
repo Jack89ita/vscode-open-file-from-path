@@ -1,6 +1,8 @@
+/* jshint esversion: 6 */
+
 //Required modules
 const vscode = require('vscode');
-const fs = require('fs');
+//const fs = require('fs');
 const path = require('path');
 const recursive = require("recursive-readdir");
 
@@ -33,7 +35,7 @@ exports.activate = context => {
       return false;
     }
 
-    //Get the pure match against the regualr expression 
+    //Get the pure match against the regualr expression
     let pureMatch = editor.document.getText(range).match(custRegExp)[1];
     //Get the last part to compare if "matchFileName" is true, otherwise search the entire path
     let lastPart = (matchFileName) ? pureMatch.split('/').pop() : pureMatch;
@@ -42,6 +44,7 @@ exports.activate = context => {
       //Get absolute path
       let folderFullPath = path.join(vscode.workspace.rootPath, folderPath);
       let foundList = [];
+
       //Recursive search into absolute path
       recursive(folderFullPath, searchExclusion, (readErr, files) => {
 
@@ -68,7 +71,7 @@ exports.activate = context => {
         } else if (foundList.length == 1){
           //If 1 match -> open file
           let url = vscode.Uri.parse('file:///' + foundList[0].path);
-          let success = vscode.commands.executeCommand('vscode.open', url);
+          vscode.commands.executeCommand('vscode.open', url);
 
         }else{
           //If multiple matches -> open quick pick
@@ -78,11 +81,11 @@ exports.activate = context => {
               vscode.workspace.openTextDocument(selected.path)
                 .then(vscode.window.showTextDocument);
             }
-          })
+          });
         }
 
-      })
-    }
+      });
+    };
 
     //Init everything
     searchPath(startingPath);
