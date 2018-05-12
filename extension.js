@@ -35,6 +35,8 @@ exports.activate = context => {
       return false;
     }
 
+    var currentlyOpenTabfilePath = editor.document.fileName;
+
     //Get the pure match against the regualr expression
     let pureMatch = editor.document.getText(range).match(custRegExp)[1];
     //Get the last part to compare if "matchFileName" is true, otherwise search the entire path
@@ -87,8 +89,14 @@ exports.activate = context => {
       });
     };
 
-    //Init everything
-    searchPath(startingPath);
+    const startingPathes = startingPath.split(",");
+    for (var index in startingPathes) {
+      if (currentlyOpenTabfilePath.startsWith(path.join(vscode.workspace.rootPath, startingPathes[index]))) {
+        //Init everything
+        searchPath(startingPathes[index]);
+        break;
+      }
+    }
   });
 
   context.subscriptions.push(openFileFromPath);
