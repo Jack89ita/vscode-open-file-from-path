@@ -1,8 +1,13 @@
 # Change Log
 
+## 1.2.2
+
+* Better error handling
+* Added a loop to search the RegExp matching array instead of manually forcing the array index.
+
 ## 1.2.1
 
-* Trim result of matching regex
+* Trim result of matching RegExp
 
 ## 1.2.0
 

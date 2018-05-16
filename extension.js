@@ -31,16 +31,30 @@ exports.activate = context => {
 
     //If range is empty throw error
     if (typeof range ==='undefined'){
-      showError("Current position is not valid, try to put the cursor beetween quotes or double quotes");
+      showError("Current cursor position is not valid, check the 'open-file-from-path.regExp' option to configure your RegExp match");
       return false;
     }
 
     var currentlyOpenTabfilePath = editor.document.fileName;
-
     //Get the pure match against the regualr expression
-    let pureMatch = editor.document.getText(range).match(custRegExp)[1];
+    let matchArray = editor.document.getText(range).match(custRegExp);
+    
+    //Loop to search for a defined match (skipping index 0 because regex will return an Array containing the entire matched string as the first element)
+    let found = false;
+    for (var i = 1; i < matchArray.length; i++) {
+      if (typeof matchArray[i] !== 'undefined'){
+        found = i;
+        break;
+      }
+    }
+
+    if (found==false){
+      showError("No match found");
+      return false;
+    }
+
     //Get the last part to compare if "matchFileName" is true, otherwise search the entire path
-    let lastPart = (matchFileName) ? pureMatch.split('/').pop() : pureMatch.trim();
+    let lastPart = (matchFileName) ? matchArray[found].split('/').pop() : matchArray[found].trim();
 
     let searchPath = folderPath => {
       //Get absolute path
