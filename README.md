@@ -24,7 +24,7 @@ Open file : alt+d
 
 ## Extension Settings
  
-* `open-file-from-path.startingPath`: Set the starting path for the file search, useful if you want to search only in a specific folder (default to `/`)
+* `open-file-from-path.startingPath`: Set the starting path for the file search; can also be and sequence of strings separated by comma, It is useful to users who manages several web sites. (default to `/`)
 * `open-file-from-path.searchExclusion`: File or folder list to exclude (default `**/node_modules/**` and `**/.vscode/**`), glob formatted
 * `open-file-from-path.regExp`: RegExp used to delimiter the path of the file to open (default `['|\"]([^'|\"]+)['|\"]`, by default get the file name between quotes or double quotes)
 * `open-file-from-path.matchPureFilename`: Choose to search and match the pure filename or the entire path (default false)

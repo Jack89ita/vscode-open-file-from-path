@@ -3,7 +3,7 @@
     "displayName": "Open file From Path",
     "description": "Simple plugin for VS Code that allows you to quickly open file starting from path string.",
     "license": "MIT",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "publisher": "jack89ita",
     "engines": {
         "vscode": "^1.19.0"
@@ -43,7 +43,7 @@
                 "open-file-from-path.startingPath": {
                     "type": "string",
                     "default": "/",
-                    "description": "Starting path."
+                    "description": "Starting path. Can also be and sequence of strings separated by comma."
                 },
                 "open-file-from-path.searchExclusion": {
                     "type": "array",

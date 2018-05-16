@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.0
+
+* Setting open-file-from-path.startingPath now accept a sequence of strings separated by a comma, It is useful to users who manages several web sites.
+
 ## 1.1.1
 
 * Updated dependencies
