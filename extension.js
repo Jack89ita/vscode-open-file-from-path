@@ -81,19 +81,25 @@ exports.activate = context => {
           }
         }
 
-        if (foundList.length == 0){
+        if (foundList.length == 0) {
           //If no matches -> throw error
           showError("Warning, no matches were found.");
-        } else if (foundList.length == 1){
+        } else if (foundList.length == 1) {
           //If 1 match -> open file
-          let url = vscode.Uri.parse('file:///' + foundList[0].path);
+          //Check for a starting slash to remove
+          let file = foundList[0].path;
+          if (file.charAt(0) === '/') file = file.substr(1);
+          let url = vscode.Uri.parse('file:///' + file);
           vscode.commands.executeCommand('vscode.open', url);
-        }else{
+        } else {
           //If multiple matches -> open quick pick
           vscode.window.showQuickPick(foundList).then(selected => {
-            if(typeof selected!=='undefined' && selected){
+            if (typeof selected !== 'undefined' && selected) {
+              //Check for a starting slash to remove
+              let file = selected.path;
+              if (file.charAt(0) === '/') file = file.substr(1);
               //If selection is valid open file
-              let url = vscode.Uri.parse('file:///' + selected.path);
+              let url = vscode.Uri.parse('file:///' + file);
               vscode.commands.executeCommand('vscode.open', url);
             }
           });
