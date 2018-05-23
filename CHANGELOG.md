@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.3
+
+* Bugfix when opening a non text file selected from VSCode QuickPick
+
 ## 1.2.2
 
 * Better error handling

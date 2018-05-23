@@ -88,14 +88,13 @@ exports.activate = context => {
           //If 1 match -> open file
           let url = vscode.Uri.parse('file:///' + foundList[0].path);
           vscode.commands.executeCommand('vscode.open', url);
-
         }else{
           //If multiple matches -> open quick pick
           vscode.window.showQuickPick(foundList).then(selected => {
             if(typeof selected!=='undefined' && selected){
               //If selection is valid open file
-              vscode.workspace.openTextDocument(selected.path)
-                .then(vscode.window.showTextDocument);
+              let url = vscode.Uri.parse('file:///' + selected.path);
+              vscode.commands.executeCommand('vscode.open', url);
             }
           });
         }
