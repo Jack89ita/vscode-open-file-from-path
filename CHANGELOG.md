@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.5
+
+* Updated dependencies
+
 ## 1.2.4
 
 * Improved compatibility with other operating system
