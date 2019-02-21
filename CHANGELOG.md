@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.3.0
+
+* Updated dependencies
+* Bugfix for relave path (../, ./)
+
 ## 1.2.5
 
 * Updated dependencies

@@ -55,6 +55,8 @@ exports.activate = context => {
 
     //Get the last part to compare if "matchFileName" is true, otherwise search the entire path
     let lastPart = (matchFileName) ? matchArray[found].split('/').pop() : matchArray[found].trim();
+    lastPart = lastPart.replace(/^.+\.\//, '');
+    if(lastPart.indexOf('./') != -1) lastPart = lastPart.replace('./', '');
 
     let searchPath = folderPath => {
       //Get absolute path
