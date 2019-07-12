@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.3.2
+
+* Bump lodash from 4.17.11 to 4.17.14
+
 ## 1.3.1
 
 * Updated dependencies
