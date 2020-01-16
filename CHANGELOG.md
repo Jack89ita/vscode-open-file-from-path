@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.0
+
+* Added option to add default extension file to help find files
+* Added option to replace dots for slash to find files
+
 ## 1.3.3
 
 * Bump eslint-utils from 1.3.1 to 1.4.2
