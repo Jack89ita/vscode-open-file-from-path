@@ -12,6 +12,8 @@ const startingPath = preferences.get('startingPath');
 const searchExclusion = preferences.get('searchExclusion');
 const custRegExp = new RegExp(preferences.get('regExp'));
 const matchFileName = preferences.get('matchFileName');
+const defaultExtensionFile = preferences.get('defaultExtensionFile');
+const replaceDotsForSlash = preferences.get('replaceDotsForSlash');
 
 //Set error view
 const showError = message => vscode.window.showErrorMessage(`Open file from path: ${message}`);
@@ -21,7 +23,7 @@ exports.activate = context => {
   const openFileFromPath = vscode.commands.registerCommand('extension.openFileFromPath', () => {
 
     //Check to see if workspace is open
-    if (!vscode.workspace.rootPath) {
+    if (!vscode.workspace.workspaceFolders) {
       return showError('You must have a workspace opened.');
     }
 
@@ -38,7 +40,7 @@ exports.activate = context => {
     var currentlyOpenTabfilePath = editor.document.fileName;
     //Get the pure match against the regualr expression
     let matchArray = editor.document.getText(range).match(custRegExp);
-    
+
     //Loop to search for a defined match (skipping index 0 because regex will return an Array containing the entire matched string as the first element)
     let found = false;
     for (var i = 1; i < matchArray.length; i++) {
@@ -56,11 +58,18 @@ exports.activate = context => {
     //Get the last part to compare if "matchFileName" is true, otherwise search the entire path
     let lastPart = (matchFileName) ? matchArray[found].split('/').pop() : matchArray[found].trim();
     lastPart = lastPart.replace(/^.+\.\//, '');
+
+    if (replaceDotsForSlash == true){
+      lastPart = lastPart.replace(/\./g,'/');
+    }
+    lastPart = lastPart + defaultExtensionFile;
     if(lastPart.indexOf('./') != -1) lastPart = lastPart.replace('./', '');
 
     let searchPath = folderPath => {
       //Get absolute path
       let folderFullPath = path.join(vscode.workspace.rootPath, folderPath);
+
+      // let folderFullPath = vscode.workspace.workspaceFolders[0].uri.path + folderPath;
       let foundList = [];
 
       //Recursive search into absolute path
@@ -74,7 +83,7 @@ exports.activate = context => {
           //If matchFileName is false, check the entire path to match
           if ((matchFileName && filePathConverted.split('/').pop() == lastPart) || (!matchFileName && filePathConverted.indexOf(lastPart)>0)){
             //Get only the relative path to show, otherwise it will be too long.
-            let relativePath = files[index].replace(vscode.workspace.rootPath, '').replace(/\\/g, '/');
+            let relativePath = files[index].replace(vscode.workspace.workspaceFolders, '').replace(/\\/g, '/');
             foundList.push({
               label: lastPart,
               description: relativePath,
@@ -112,7 +121,7 @@ exports.activate = context => {
 
     const startingPathes = startingPath.split(",");
     for (var index in startingPathes) {
-      if (currentlyOpenTabfilePath.startsWith(path.join(vscode.workspace.rootPath, startingPathes[index]))) {
+      if (currentlyOpenTabfilePath.startsWith(startingPathes.join(vscode.workspace.workspaceFolders, startingPathes[index]))) {
         //Init everything
         searchPath(startingPathes[index]);
         break;
