@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.3.4
+
+* Bump minimist version
+
 ## 1.3.3
 
 * Bump eslint-utils from 1.3.1 to 1.4.2
